@@ -1,0 +1,6 @@
+
+all_scalars.json
+mnist/*
+runs/*
+.ipynb_checkpoints/*
+.python-version
