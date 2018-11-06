@@ -112,7 +112,7 @@ echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bash_profile
 echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bash_profile
 echo 'eval "$(pyenv init -)"' >> ~/.bash_profile
 echo 'eval "$(pyenv virtualenv-init -)"' >> ~/.bash_profile
-exec "$SHELL"
+source ~/.bash_profile
 ```
 
 ### 2.2. Anaconda
@@ -151,7 +151,7 @@ pyenv local miniconda3-4.3.30
 Current environment: miniconda3-4.3.30
 
 ```bash
-conda create -n DLLecture conda==4.3.30
+conda create -n DLLecture conda==4.3.30         # Important!!
 pyenv local miniconda3-4.3.30/envs/DLLecture
 ```
 
@@ -236,9 +236,9 @@ vim ~/.jupyter/jupyter_notebook_config.py
 
 - Three modes in `vim` : Command, Input, Line. The default mode is Command.
 - In Command mode, type `/` and item string to search the item in `vim`.
-
 - Type `i` to enter Input mode. you can modify the contents in Input mode.
 - Push `esc` back to Command mode anytime.
+- In Command mode, type `:wq` to save your change and quit.
 
 These items need to be set. To set new value, delete the `#` in front of the items firstly.
 
