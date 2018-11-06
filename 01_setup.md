@@ -8,14 +8,12 @@
 
 `{ }`means a placeholder in the following.
 
-
-
 ##### MacOS
 
 1. Install Homebrew
 
 ```bash
-ask
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 ```
 
 2. Add a public key to the remote server's authorized_keys file
@@ -25,23 +23,17 @@ brew install ssh-copy-id
 ssh-copy-id {user name}@{remote IP}
 ```
 
-
-
-#####  Windows 10 ([Ubuntu subsystem](https://docs.microsoft.com/en-us/windows/wsl/install-win10)) 
+##### Windows 10 ([Ubuntu subsystem](https://docs.microsoft.com/en-us/windows/wsl/install-win10))
 
 ```bash
 ssh-copy-id {username}@{remote IP}
 ```
-
-
 
 ### 1.2 Log in to server
 
 ```
 ssh -l{user name} {remote IP}
 ```
-
-
 
 ### 1.3 Mount remote drivers
 
@@ -60,19 +52,13 @@ When you want to unmount a driver,
 diskutil umount ~/Mounts/{mount point}
 ```
 
-
-
 #### Windows
 
 Install sshfs for Windows by following [this](https://github.com/feo-cz/win-sshfs).
 
+---
 
-
-------
-
-*<u>Notice</u>*: The storage of `/home/*` in the remote server is shared by all users at this time. If you want to handle big data files (eg.  >=1GB ),  please consider to additionally mount `{data}` volumes for your usage. Let's take this as an exercise.
-
-
+_<u>Notice</u>_: The storage of `/home/*` in the remote server is shared by all users at this time. If you want to handle big data files (eg. >=1GB ), please consider to additionally mount `{data}` volumes for your usage. Let's take this as an exercise.
 
 ## 2. Python
 
@@ -84,9 +70,7 @@ Install sshfs for Windows by following [this](https://github.com/feo-cz/win-sshf
 
 - Reference: https://github.com/pyenv/pyenv
 
-  ​                   https://github.com/pyenv/pyenv-virtualenv
-
-
+  ​ https://github.com/pyenv/pyenv-virtualenv
 
 #### Installation
 
@@ -103,8 +87,6 @@ echo 'if which pyenv-virtualenv-init > /dev/null; ' \
 exec "$SHELL"
 ```
 
-
-
 ##### Linux or the subsystem in Windows 10
 
 ```bash
@@ -116,15 +98,11 @@ echo 'eval "$(pyenv virtualenv-init -)"' >> ~/.bash_profile
 exec "$SHELL"
 ```
 
-
-
 ### 2.2. Anaconda
 
-* To easily manage python libraries for data science and machine learning
-* Install Anaconda 2&3 to adapt to different environments by various projects.
-* Choose version 4.3 for Anaconda 3 due to the issue (https://github.com/pyenv/pyenv-virtualenv/issues/246) of persistent virtualenv setting.
-
-
+- To easily manage python libraries for data science and machine learning
+- Install Anaconda 2&3 to adapt to different environments by various projects.
+- Choose version 4.3 for Anaconda 3 due to the issue (https://github.com/pyenv/pyenv-virtualenv/issues/246) of persistent virtualenv setting.
 
 #### Installation
 
@@ -140,11 +118,9 @@ pyenv local DLLecture2
 
 Current environment: DLLecture2 (miniconda2-latest/envs/DLLecture2)
 
-```bash 
+```bash
 conda install anaconda
 ```
-
-
 
 ##### Anaconda 3
 
@@ -180,9 +156,7 @@ The output may be as follows.
 ['', '{your home}/.pyenv/versions/miniconda3-4.3.30/envs/DLLecture/lib/python36.zip', '{your home}/.pyenv/versions/miniconda3-4.3.30/envs/DLLecture/lib/python3.6', '{your home}/.pyenv/versions/miniconda3-4.3.30/envs/DLLecture/lib/python3.6/lib-dynload', '{your home}/.pyenv/versions/miniconda3-4.3.30/envs/DLLecture/lib/python3.6/site-packages']
 ```
 
-Let's use `(miniconda3-4.3.30/envs/DLLecture)` as our  default environment in the following.
-
-
+Let's use `(miniconda3-4.3.30/envs/DLLecture)` as our default environment in the following.
 
 ## 3. DL Libraries
 
@@ -190,23 +164,17 @@ Let's use `(miniconda3-4.3.30/envs/DLLecture)` as our  default environment in th
 
 Use v1.10.0.
 
-
-
 #### For Mac or non-CUDA machine
 
 ```bash
 conda install tensorflow==1.10.0
 ```
 
-
-
 #### For CUDA environment (DL-box)
 
 ```bash
 conda install tensorflow-gpu==1.10.0
 ```
-
-
 
 ### 3.2. Pytorch
 
@@ -219,13 +187,9 @@ conda install pytorch==0.4.1 torchvision -c pytorch
 
 It may take a while to download...
 
-
-
 ## 4. Jupyter
 
-* A good interactive notebook environment for research
-
-
+- A good interactive notebook environment for research
 
 ### 4.1. Create a Notebook password
 
@@ -242,11 +206,9 @@ python
 from notebook.auth import passwd; passwd()
 ```
 
-3. Then copy the pass code  `type:salt:hashed-password` after inputing and verifying your password.
+3. Then copy the pass code `type:salt:hashed-password` after inputing and verifying your password.
 
 4. Type `exit()` to quit the shell.
-
-
 
 ### 4.2. Configure Notebook
 
@@ -255,13 +217,13 @@ jupyter notebook --generate-config
 vim ~/.jupyter/jupyter_notebook_config.py
 ```
 
-* Three modes in `vim` : Command, Input, Line. The default mode is Command.
-* In Command mode, type `/` and item string to search the item in `vim`.
+- Three modes in `vim` : Command, Input, Line. The default mode is Command.
+- In Command mode, type `/` and item string to search the item in `vim`.
 
-* Type `i` to enter Input mode. you can modify the contents in Input mode.
-* Push `esc` back to Command mode anytime.
+- Type `i` to enter Input mode. you can modify the contents in Input mode.
+- Push `esc` back to Command mode anytime.
 
-These items need to be set. To set new value, delete the `# ` in front of the items firstly. 
+These items need to be set. To set new value, delete the `#` in front of the items firstly.
 
 ```python
 c.NotebookApp.ip = 'localhost' # '{remote IP}' for DL-box
@@ -269,8 +231,6 @@ c.NotebookApp.password = u'{paste the above pass code}'
 c.NotebookApp.port = {your port} # 8888 for your PC or unused one in 1024~65535 for DL-box
 c.NotebookApp.open_browser = False
 ```
-
-
 
 ### 4.3. Launch Notebook server
 
@@ -280,9 +240,7 @@ c.NotebookApp.open_browser = False
 jupyter notebook
 ```
 
-Then open` http://localhost:8888/` in the browser and login with your password.
-
-
+Then open`http://localhost:8888/` in the browser and login with your password.
 
 #### In remote server (DL-box)
 
@@ -291,24 +249,20 @@ byobu new -s jupyter
 jupyter notebook
 ```
 
-Push `F6` to detach from the session where the program will keep running even if you logout. 
+Push `F6` to detach from the session where the program will keep running even if you logout.
 
 If you want to enter a session again, use `byobu attach -t {session name}` or just run `byobu` to select one. For more details about `byobu`, see http://byobu.co.
 
-Now, open` http://{remote IP}:{your port}/` in the browser and login with your password. 
-
-
+Now, open`http://{remote IP}:{your port}/` in the browser and login with your password.
 
 ### 4.4. Install Python kernel
 
-* Install kernel to let the virtual environment work in Jupyter.
+- Install kernel to let the virtual environment work in Jupyter.
 
 ```bash
 cd ~/Projects/DLLecture
 python -m ipykernel install --user --name DLLecture
 ```
-
-
 
 ### 4.5. Launch TensorBoard server
 
@@ -321,9 +275,7 @@ cd ~/Projects/DLLecture
 tensorboard --logdir ./runs
 ```
 
-Then open` http://localhost:6006/` in the browser.
-
-
+Then open`http://localhost:6006/` in the browser.
 
 #### In remote server (DL-box)
 
@@ -333,19 +285,17 @@ cd ~/Projects/DLLecture
 tensorboard --logdir ./runs --port {your another port}
 ```
 
-Push `F6` to detach from the session. 
+Push `F6` to detach from the session.
 
-Then open` http://{remote IP}:{your another port}/` in the browser. 
-
-
+Then open`http://{remote IP}:{your another port}/` in the browser.
 
 ## 5. Test on your settings
 
-* The home of Jupyter is the location where `jupyter` was executed, i.e., `~/Projects/DLLecture` in this example.
+- The home of Jupyter is the location where `jupyter` was executed, i.e., `~/Projects/DLLecture` in this example.
 
-* Click the `New` in the right top coner to create a new folder, then check the folder and rename it to `runs` for tensorboard's data loading.
-* Click `New` to create a new `DLLecture`  notebook.
-* Copy the following code (edited from this [demo](https://github.com/lanpa/tensorboardX)) into the first shell, then push `shift`+`return` to run it,
+- Click the `New` in the right top coner to create a new folder, then check the folder and rename it to `runs` for tensorboard's data loading.
+- Click `New` to create a new `DLLecture` notebook.
+- Copy the following code (edited from this [demo](https://github.com/lanpa/tensorboardX)) into the first shell, then push `shift`+`return` to run it,
 
 ```python
 import torch
@@ -392,8 +342,8 @@ for n_iter in range(100):
         # needs tensorboard 0.4RC or later
         writer.add_pr_curve('xoxo', np.random.randint(2, size=100), np.random.rand(100), n_iter)
 
-writer.add_graph(resnet18, torch.randn(1, 3, 224, 224))        
-        
+writer.add_graph(resnet18, torch.randn(1, 3, 224, 224))
+
 dataset = datasets.MNIST('mnist', train=False, download=True)
 images = dataset.test_data[:100].float()
 label = dataset.test_labels[:100]
@@ -407,4 +357,3 @@ writer.close()
 ```
 
 Wait until it finishes, and see the result on TensorBoard.
-
