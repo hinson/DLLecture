@@ -10,13 +10,19 @@
 
 ##### MacOS
 
-1. Install Homebrew
+1. Create a key file for ssh
+
+   ```bash
+   ssh-keygen
+   ```
+
+2. Install Homebrew
 
 ```bash
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 ```
 
-2. Add a public key to the remote server's authorized_keys file
+3. Add a public key to the remote server's authorized_keys file
 
 ```bash
 brew install ssh-copy-id
@@ -28,6 +34,7 @@ ssh-copy-id {user name}@{remote IP}
 Use the subsystem environment to invoke linux commands in the following.
 
 ```bash
+ssh-keygen
 ssh-copy-id {username}@{remote IP}
 ```
 
@@ -36,6 +43,14 @@ ssh-copy-id {username}@{remote IP}
 ```
 ssh -l{user name} {remote IP}
 ```
+
+If you want to change the password, use
+
+```bash
+passwd
+```
+
+
 
 ### 1.3 Mount remote drivers
 
