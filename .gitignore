@@ -1,6 +1,7 @@
 
-all_scalars.json
+*.json
 mnist/*
 runs/*
 .ipynb_checkpoints/*
 .python-version
+Slides/*

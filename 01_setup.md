@@ -8,24 +8,69 @@
 
 `{ }`means a placeholder in the following.
 
+
+
 ##### MacOS
+
+1. Install Homebrew
+
+```bash
+ask
+```
+
+2. Add a public key to the remote server's authorized_keys file
 
 ```bash
 brew install ssh-copy-id
 ssh-copy-id {user name}@{remote IP}
 ```
 
-#####  [Ubuntu subsystem in Windows 10](https://docs.microsoft.com/en-us/windows/wsl/install-win10)
+
+
+#####  Windows 10 ([Ubuntu subsystem](https://docs.microsoft.com/en-us/windows/wsl/install-win10)) 
 
 ```bash
-ssh-copy-id {user name}@{remote IP}
+ssh-copy-id {username}@{remote IP}
 ```
+
+
 
 ### 1.2 Log in to server
 
 ```
 ssh -l{user name} {remote IP}
 ```
+
+
+
+### 1.3 Mount remote drivers
+
+#### MacOS
+
+```bash
+brew install sshfs
+brew cask install osxfuse
+mkdir -p ~/Mounts/{mount point}
+sshfs {username}@{remote IP}:/home/{username} ~/Mounts/{mount point}
+```
+
+When you want to unmount a driver,
+
+```bash
+diskutil umount ~/Mounts/{mount point}
+```
+
+
+
+#### Windows
+
+Install sshfs for Windows by following [this](https://github.com/feo-cz/win-sshfs).
+
+
+
+------
+
+*<u>Notice</u>*: The storage of `/home/*` in the remote server is shared by all users at this time. If you want to handle big data files (eg.  >=1GB ),  please consider to additionally mount `{data}` volumes for your usage. Let's take this as an exercise.
 
 
 
@@ -40,6 +85,8 @@ ssh -l{user name} {remote IP}
 - Reference: https://github.com/pyenv/pyenv
 
   ​                   https://github.com/pyenv/pyenv-virtualenv
+
+
 
 #### Installation
 
@@ -56,6 +103,8 @@ echo 'if which pyenv-virtualenv-init > /dev/null; ' \
 exec "$SHELL"
 ```
 
+
+
 ##### Linux or the subsystem in Windows 10
 
 ```bash
@@ -67,11 +116,15 @@ echo 'eval "$(pyenv virtualenv-init -)"' >> ~/.bash_profile
 exec "$SHELL"
 ```
 
+
+
 ### 2.2. Anaconda
 
 * To easily manage python libraries for data science and machine learning
 * Install Anaconda 2&3 to adapt to different environments by various projects.
 * Choose version 4.3 for Anaconda 3 due to the issue (https://github.com/pyenv/pyenv-virtualenv/issues/246) of persistent virtualenv setting.
+
+
 
 #### Installation
 
@@ -90,6 +143,8 @@ Current environment: DLLecture2 (miniconda2-latest/envs/DLLecture2)
 ```bash 
 conda install anaconda
 ```
+
+
 
 ##### Anaconda 3
 
@@ -135,17 +190,23 @@ Let's use `(miniconda3-4.3.30/envs/DLLecture)` as our  default environment in th
 
 Use v1.10.0.
 
+
+
 #### For Mac or non-CUDA machine
 
 ```bash
 conda install tensorflow==1.10.0
 ```
 
+
+
 #### For CUDA environment (DL-box)
 
 ```bash
 conda install tensorflow-gpu==1.10.0
 ```
+
+
 
 ### 3.2. Pytorch
 
@@ -158,9 +219,13 @@ conda install pytorch==0.4.1 torchvision -c pytorch
 
 It may take a while to download...
 
+
+
 ## 4. Jupyter
 
 * A good interactive notebook environment for research
+
+
 
 ### 4.1. Create a Notebook password
 
@@ -180,6 +245,8 @@ from notebook.auth import passwd; passwd()
 3. Then copy the pass code  `type:salt:hashed-password` after inputing and verifying your password.
 
 4. Type `exit()` to quit the shell.
+
+
 
 ### 4.2. Configure Notebook
 
@@ -203,6 +270,8 @@ c.NotebookApp.port = {your port} # 8888 for your PC or unused one in 1024~65535 
 c.NotebookApp.open_browser = False
 ```
 
+
+
 ### 4.3. Launch Notebook server
 
 #### In your PC
@@ -212,6 +281,8 @@ jupyter notebook
 ```
 
 Then open` http://localhost:8888/` in the browser and login with your password.
+
+
 
 #### In remote server (DL-box)
 
@@ -226,6 +297,8 @@ If you want to enter a session again, use `byobu attach -t {session name}` or ju
 
 Now, open` http://{remote IP}:{your port}/` in the browser and login with your password. 
 
+
+
 ### 4.4. Install Python kernel
 
 * Install kernel to let the virtual environment work in Jupyter.
@@ -234,6 +307,8 @@ Now, open` http://{remote IP}:{your port}/` in the browser and login with your p
 cd ~/Projects/DLLecture
 python -m ipykernel install --user --name DLLecture
 ```
+
+
 
 ### 4.5. Launch TensorBoard server
 
@@ -247,6 +322,8 @@ tensorboard --logdir ./runs
 ```
 
 Then open` http://localhost:6006/` in the browser.
+
+
 
 #### In remote server (DL-box)
 
