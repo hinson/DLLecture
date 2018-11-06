@@ -57,8 +57,8 @@ passwd
 #### MacOS
 
 ```bash
-brew install sshfs
 brew cask install osxfuse
+brew install sshfs
 mkdir -p ~/Mounts/{mount point}
 sshfs {username}@{remote IP}:/home/{username} ~/Mounts/{mount point}
 ```
