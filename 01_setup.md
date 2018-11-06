@@ -1,4 +1,4 @@
-# Set up Deep Learning Research Environment
+# Set Up Deep Learning Research Environment
 
 [TOC]
 
@@ -24,6 +24,8 @@ ssh-copy-id {user name}@{remote IP}
 ```
 
 ##### Windows 10 ([Ubuntu subsystem](https://docs.microsoft.com/en-us/windows/wsl/install-win10))
+
+Use the subsystem environment to invoke linux commands in the following.
 
 ```bash
 ssh-copy-id {username}@{remote IP}
