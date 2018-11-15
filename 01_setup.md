@@ -50,8 +50,6 @@ If you want to change the password, use
 passwd
 ```
 
-
-
 ### 1.3 Mount remote drivers
 
 #### MacOS
@@ -119,7 +117,7 @@ source ~/.bash_profile
 
 - To easily manage python libraries for data science and machine learning
 - Install Anaconda 2&3 to adapt to different environments by various projects.
-- Choose version 4.3 for Anaconda 3 due to the issue (https://github.com/pyenv/pyenv-virtualenv/issues/246) of persistent virtualenv setting.
+- ~~Choose version 4.3 for Anaconda 3 due to the issue (https://github.com/pyenv/pyenv-virtualenv/issues/246) of persistent virtualenv setting.~~
 
 #### Installation
 
@@ -141,21 +139,23 @@ conda install anaconda
 
 ##### Anaconda 3
 
+Using miniconda 2 to create environments of Anaconda 3 can avoid the issue.
+
 ```bash
-pyenv install miniconda3-4.3.30
 mkdir -p ~/Projects/DLLecture
 cd ~/Projects/DLLecture
-pyenv local miniconda3-4.3.30
+pyenv local miniconda2-latest
 ```
 
-Current environment: miniconda3-4.3.30
+Current environment: miniconda2-latest
 
 ```bash
-conda create -n DLLecture conda==4.3.30         # Important!!
-pyenv local miniconda3-4.3.30/envs/DLLecture
+conda update conda
+conda create -n DLLecture python==3.6.6      # Important!!
+pyenv local miniconda2-latest/envs/DLLecture
 ```
 
-Current environment: miniconda3-4.3.30/envs/DLLecture
+Current environment: miniconda2-latest/envs/DLLecture
 
 ```bash
 conda install anaconda
@@ -167,13 +167,13 @@ Check whether your virtualenv is set correctly.
 python -c 'import sys; print(sys.path)';
 ```
 
-The output may be as follows.
+The output may be similar to the following.
 
 ```
-['', '{your home}/.pyenv/versions/miniconda3-4.3.30/envs/DLLecture/lib/python36.zip', '{your home}/.pyenv/versions/miniconda3-4.3.30/envs/DLLecture/lib/python3.6', '{your home}/.pyenv/versions/miniconda3-4.3.30/envs/DLLecture/lib/python3.6/lib-dynload', '{your home}/.pyenv/versions/miniconda3-4.3.30/envs/DLLecture/lib/python3.6/site-packages']
+['', '{your home}/.pyenv/versions/miniconda2-latest/envs/DLLecture/lib/python36.zip', '{your home}/.pyenv/versions/miniconda2-latest/envs/DLLecture/lib/python3.6', '{your home}/.pyenv/versions/miniconda2-latest/envs/DLLecture/lib/python3.6/lib-dynload', '{your home}/.pyenv/versions/miniconda2-latest/envs/DLLecture/lib/python3.6/site-packages']
 ```
 
-Let's use `(miniconda3-4.3.30/envs/DLLecture)` as our default environment in the following.
+Let's use `(miniconda2-latest/envs/DLLecture)` as our default environment in the following.
 
 ## 3. DL Libraries
 
@@ -237,7 +237,7 @@ vim ~/.jupyter/jupyter_notebook_config.py
 - Three modes in `vim` : Command, Input, Line. The default mode is Command.
 - In Command mode, type `/` and item string to search the item in `vim`.
 - Type `i` to enter Input mode. you can modify the contents in Input mode.
-- Push `esc` back to Command mode anytime.
+- Press `esc` back to Command mode anytime.
 - In Command mode, type `:wq` to save your change and quit.
 
 These items need to be set. To set new value, delete the `#` in front of the items firstly.
@@ -266,7 +266,7 @@ byobu new -s jupyter
 jupyter notebook
 ```
 
-Push `F6` to detach from the session where the program will keep running even if you logout.
+Press `F6` to detach from the session where the program will keep running even if you logout.
 
 If you want to enter a session again, use `byobu attach -t {session name}` or just run `byobu` to select one. For more details about `byobu`, see http://byobu.co.
 
@@ -302,7 +302,7 @@ cd ~/Projects/DLLecture
 tensorboard --logdir ./runs --port {your another port}
 ```
 
-Push `F6` to detach from the session.
+Press `F6` to detach from the session.
 
 Then open`http://{remote IP}:{your another port}/` in the browser.
 
@@ -312,7 +312,7 @@ Then open`http://{remote IP}:{your another port}/` in the browser.
 
 - Click the `New` in the right top coner to create a new folder, then check the folder and rename it to `runs` for tensorboard's data loading.
 - Click `New` to create a new `DLLecture` notebook.
-- Copy the following code (edited from this [demo](https://github.com/lanpa/tensorboardX)) into the first shell, then push `shift`+`return` to run it,
+- Copy the following code (edited from this [demo](https://github.com/lanpa/tensorboardX)) into the first shell, then press `shift`+`return` to run it,
 
 ```python
 import torch
