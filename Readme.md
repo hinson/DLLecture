@@ -1,12 +1,10 @@
 # Set Up Deep Learning Research Environment
 
-[TOC]
-
 ## 1. Remote Linux Server (DL-box)
 
 ### 1.1 Login without password
 
-`{ }`means a placeholder in the following.
+`{ }` means a placeholder in the following.
 
 ##### MacOS
 
@@ -131,7 +129,7 @@ cd ~/Projects/DLLecture2
 pyenv local DLLecture2
 ```
 
-Current environment: DLLecture2 (miniconda2-latest/envs/DLLecture2)
+Current environment: DLLecture2 (miniconda2-latest/envs/DLLecture2). You can use `$ pyenv version` to confirm the current environment.
 
 ```bash
 conda install anaconda
@@ -147,15 +145,15 @@ cd ~/Projects/DLLecture
 pyenv local miniconda2-latest
 ```
 
-Current environment: miniconda2-latest
+Current environment: miniconda2-latest.
 
 ```bash
 conda update conda
-conda create -n DLLecture python==3.6.6      # Important!!
+conda create -n DLLecture conda==4.3.30      # Important!!
 pyenv local miniconda2-latest/envs/DLLecture
 ```
 
-Current environment: miniconda2-latest/envs/DLLecture
+Current environment: miniconda2-latest/envs/DLLecture.
 
 ```bash
 conda install anaconda
