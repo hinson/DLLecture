@@ -83,9 +83,20 @@ _<u>Notice</u>_: The storage of `/home/*` in the remote server is shared by all 
 
 - Reference: https://github.com/pyenv/pyenv
 
-  ​ https://github.com/pyenv/pyenv-virtualenv
+   https://github.com/pyenv/pyenv-virtualenv
 
 #### Installation
+
+##### Linux or the subsystem in Windows 10
+
+```bash
+curl -L https://github.com/pyenv/pyenv-installer/raw/master/bin/pyenv-installer | bash
+echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bash_profile
+echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bash_profile
+echo 'eval "$(pyenv init -)"' >> ~/.bash_profile
+echo 'eval "$(pyenv virtualenv-init -)"' >> ~/.bash_profile
+source ~/.bash_profile
+```
 
 ##### MacOS
 
@@ -100,17 +111,6 @@ echo 'if which pyenv-virtualenv-init > /dev/null; ' \
 exec "$SHELL"
 ```
 
-##### Linux or the subsystem in Windows 10
-
-```bash
-curl -L https://github.com/pyenv/pyenv-installer/raw/master/bin/pyenv-installer | bash
-echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bash_profile
-echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bash_profile
-echo 'eval "$(pyenv init -)"' >> ~/.bash_profile
-echo 'eval "$(pyenv virtualenv-init -)"' >> ~/.bash_profile
-source ~/.bash_profile
-```
-
 ### 2.2. Anaconda
 
 - To easily manage python libraries for data science and machine learning
@@ -119,85 +119,42 @@ source ~/.bash_profile
 
 #### Installation
 
-##### Anaconda 2
+##### Anaconda
 
 ```bash
-pyenv install miniconda2-latest
-pyenv virtualenv miniconda2-latest DLLecture2
-mkdir -p ~/Projects/DLLecture2
-cd ~/Projects/DLLecture2
-pyenv local DLLecture2
-```
-
-Current environment: DLLecture2 (miniconda2-latest/envs/DLLecture2). You can use `$ pyenv version` to confirm the current environment.
-
-```bash
-conda install anaconda
-```
-
-##### Anaconda 3
-
-Using miniconda 2 to create environments of Anaconda 3 can avoid the issue.
-
-```bash
+pyenv install anaconda3-X.X
 mkdir -p ~/Projects/DLLecture
 cd ~/Projects/DLLecture
-pyenv local miniconda2-latest
+pyenv local anaconda3-X.X
+conda create -n DLLecture --clone root
+conda activate DLLecture
 ```
 
-Current environment: miniconda2-latest.
-
-```bash
-conda update conda
-conda create -n DLLecture conda==4.3.30      # Important!!
-pyenv local miniconda2-latest/envs/DLLecture
-```
-
-Current environment: miniconda2-latest/envs/DLLecture.
-
-```bash
-conda install anaconda
-```
-
-Check whether your virtualenv is set correctly.
-
-```bash
-python -c 'import sys; print(sys.path)';
-```
-
-The output may be similar to the following.
-
-```
-['', '{your home}/.pyenv/versions/miniconda2-latest/envs/DLLecture/lib/python36.zip', '{your home}/.pyenv/versions/miniconda2-latest/envs/DLLecture/lib/python3.6', '{your home}/.pyenv/versions/miniconda2-latest/envs/DLLecture/lib/python3.6/lib-dynload', '{your home}/.pyenv/versions/miniconda2-latest/envs/DLLecture/lib/python3.6/site-packages']
-```
-
-Let's use `(miniconda2-latest/envs/DLLecture)` as our default environment in the following.
+You will see `(DLLecture)(anaconda3-X.X)` in the front of your current directory.
 
 ## 3. DL Libraries
 
 ### 3.1. TensorFlow
 
-Use v1.10.0.
+Use v1.15
 
 #### For Mac or non-CUDA machine
 
 ```bash
-conda install tensorflow==1.10.0
+conda install tensorflow==1.15
 ```
 
 #### For CUDA environment (DL-box)
 
 ```bash
-conda install tensorflow-gpu==1.10.0
+conda install tensorflow-gpu==1.15
 ```
 
 ### 3.2. Pytorch
 
-Use v0.4.1.
-
 ```bash
 pip install tensorboardX
-conda install pytorch==0.4.1 torchvision -c pytorch
+conda install pytorch torchvision ignite cudatoolkit=10.1 -c pytorch
 ```
 
 It may take a while to download...
@@ -314,7 +271,7 @@ Then open`http://{remote IP}:{your another port}/` in the browser.
 
 ```python
 import torch
-import torchvision.utils as vutils
+import torchvision
 import numpy as np
 import torchvision.models as models
 from torchvision import datasets
@@ -340,7 +297,7 @@ for n_iter in range(100):
 
     dummy_img = torch.rand(32, 3, 64, 64)  # output from network
     if n_iter % 10 == 0:
-        x = vutils.make_grid(dummy_img, normalize=True, scale_each=True)
+        x = torchvision.utils.make_grid(dummy_img, normalize=True, scale_each=True)
         writer.add_image('Image', x, n_iter)
 
         dummy_audio = torch.zeros(sample_rate * 2)
