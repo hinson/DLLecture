@@ -1,33 +1,71 @@
 # Set Up Deep Learning Research Environment
 
+## 0. Begin
+
+##### MacOS
+
+1. Install Homebrew
+
+```bash
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+```
+
+2. Install git
+
+```bash
+brew install git   
+```
+
+3. Clone this repository
+
+```bash
+mkdir -p ~/Projects
+cd ~/Projects
+git clone https://github.com/hinson/DLLecture
+```
+
+
+
+##### Windows 10 ([Ubuntu subsystem](https://docs.microsoft.com/en-us/windows/wsl/install-win10))
+
+1. Install git
+
+```bash
+apt install git   
+```
+
+2. Clone this repository
+
+```bash
+mkdir -p ~/Projects
+cd ~/Projects
+git clone https://github.com/hinson/DLLecture
+```
+
+
+
 ## 1. Remote Linux Server (DL-box)
 
 ### 1.1 Login without password
 
 `{ }` means a placeholder in the following.
 
-##### MacOS
+#### MacOS
 
 1. Create a key file for ssh
 
-   ```bash
-   ssh-keygen
-   ```
-
-2. Install Homebrew
-
 ```bash
-/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+ssh-keygen
 ```
 
-3. Add a public key to the remote server's authorized_keys file
+2. Add a public key to the remote server's authorized_keys file
 
 ```bash
 brew install ssh-copy-id
 ssh-copy-id {user name}@{remote IP}
 ```
 
-##### Windows 10 ([Ubuntu subsystem](https://docs.microsoft.com/en-us/windows/wsl/install-win10))
+#### Windows 10 ([Ubuntu subsystem](https://docs.microsoft.com/en-us/windows/wsl/install-win10))
 
 Use the subsystem environment to invoke linux commands in the following.
 
@@ -73,6 +111,8 @@ Install sshfs for Windows by following [this](https://github.com/feo-cz/win-sshf
 
 _<u>Notice</u>_: The storage of `/home/*` in the remote server is shared by all users at this time. If you want to handle big data files (eg. >=1GB ), please consider to additionally mount `{data}` volumes for your usage. Let's take this as an exercise.
 
+
+
 ## 2. Python
 
 ### 2. 1. Pyenv
@@ -114,23 +154,28 @@ exec "$SHELL"
 ### 2.2. Anaconda
 
 - To easily manage python libraries for data science and machine learning
-- Install Anaconda 2&3 to adapt to different environments by various projects.
-- ~~Choose version 4.3 for Anaconda 3 due to the issue (https://github.com/pyenv/pyenv-virtualenv/issues/246) of persistent virtualenv setting.~~
+- Install Anaconda 3 to adapt to different environments by various projects.
 
 #### Installation
 
 ##### Anaconda
 
 ```bash
-pyenv install anaconda3-X.X
-mkdir -p ~/Projects/DLLecture
+pyenv install anaconda3-5.1.0
 cd ~/Projects/DLLecture
-pyenv local anaconda3-X.X
+pyenv local anaconda3-5.1.0
 conda create -n DLLecture --clone root
 conda activate DLLecture
 ```
 
-You will see `(DLLecture)(anaconda3-X.X)` in the front of your current directory.
+If you reopen the terminal, only the following commands need.
+
+```bash
+cd ~/Projects/DLLecture
+conda activate DLLecture
+```
+
+
 
 ## 3. DL Libraries
 
